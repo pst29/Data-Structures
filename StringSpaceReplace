@@ -1,0 +1,40 @@
+package Question;
+import java.util.*;
+public class StringSpaceReplace {
+
+	public static void main(String args[])
+	{
+		String s="P a la";
+		char [] s_array= s.toCharArray();
+		int length=s_array.length;
+		
+		
+		//System.out.println("sdfasf"+s_array.length);
+		
+		int spaceCount=0;
+		for(int i=0;i<length;i++)
+		{
+			if(s_array[i]==' ')
+			{
+				spaceCount++;
+			}
+		}
+		//int spaceCount=0;
+		int newLength=spaceCount*3+(length-spaceCount)-1;
+		for(int i=length-1;i>=0;i--)
+		{
+			System.out.println(i);
+			
+			if(s_array[i]==' ')
+			{
+				System.out.println(newLength);
+				System.out.println("Palak--"+s_array.length);
+				
+			}
+			
+		}
+	}
+	
+	
+	
+}
