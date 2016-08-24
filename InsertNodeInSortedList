@@ -1,0 +1,76 @@
+package linkedList;
+
+public class InsertNodeInSortedList {
+	
+	public static void main(String args[])
+	{
+	
+	SLinkedList sarr1=new SLinkedList();
+	boolean a=false;
+	
+	sarr1.insertAtEnd(1);
+	sarr1.insertAtEnd(2);
+	sarr1.insertAtEnd(4);
+	sarr1.insertAtEnd(8);
+	sarr1.insertAtEnd(10);
+	
+	int newData=7;
+	
+	System.out.println("Old List: "+sarr1.toString());
+	
+	for(int i=0;i<=9;i+=2)
+	{
+	 a=insertNodeInSortedList(sarr1.getHead(),i,sarr1);
+	}
+	if(a==true)System.out.println("New List: "+sarr1.toString());
+	
+	
+	
+	
+	}
+	
+	public static  boolean insertNodeInSortedList(ListNode head, int newData, SLinkedList s)
+	{
+		
+		/*
+		 This for loop works but fails when next node is null hence using while loop
+		 
+		for(p=head;(q=p.getNext()).getData()<=newNode.getData();p=q)
+		{
+			System.out.println("-"+p.getData());
+		}
+		*/
+		/*
+		while ((q=p.getNext())!=null && p.getNext().getData()<=newNode.getData())
+		{
+			p=q;
+			System.out.println("-"+p.getData());
+			
+		}
+		*/
+		
+		ListNode current=head;
+		ListNode temp=null;
+		
+		while(current!=null && current.getData()<=newData){
+			
+			temp=current;
+			current=current.getNext();
+			
+		}
+		
+		if(temp!=null)
+		{
+			ListNode newNode=new ListNode(newData);
+			newNode.setNext(current);
+			temp.setNext(newNode);
+			return true;
+			
+		}
+		
+		else{
+			s.insertAtBegin(newData);
+			return true;
+		}	
+	}
+}
