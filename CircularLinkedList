@@ -1,0 +1,103 @@
+
+public class cListNode {
+	private int data;
+	private cListNode next;
+	
+	cListNode(int data)
+	{
+		this.data=data;
+		
+	}
+	
+	public void setData(int data)
+	{
+		this.data=data;
+	}
+
+	public int getData()
+	{
+		return data;
+	}
+	
+	public void setNext(cListNode next)
+	{
+		this.next=next;
+		
+	}
+	
+	public cListNode getNext()
+	{
+		return next;
+	}
+}
+
+
+public class CLinkedList {
+	
+	private int length;
+	private cListNode tail;
+	
+	public int getLength()
+	{
+		return length;
+	}	
+
+	public cListNode getTail()
+	{
+		return tail;
+	}
+	
+	public void setTail(cListNode tail)
+	{
+		this.tail=tail;
+	}
+	
+	public void insertNode(int data)
+	{
+		cListNode newNode=new cListNode(data);
+		if(tail==null)
+		{
+			tail=newNode;
+			tail.setNext(tail);
+			
+		}
+		else
+		{
+			newNode.setNext(tail.getNext());
+			tail.setNext(newNode);
+		}
+		
+	}
+	
+	public String toString()
+	{
+		String result="";
+		if(tail==null) return result;
+		
+		cListNode temp=tail.getNext();
+	
+		
+		while(temp!=tail)
+		{
+			result+=temp.getData()+"-->";
+			temp=temp.getNext();
+		}
+		
+		
+		return result+tail.getData()+"-->";
+	}
+}
+
+public class CLLMain {
+
+	public static void main(String args[])
+	{
+		CLinkedList cll2=new CLinkedList();
+		cll2.insertNode(10);
+		cll2.insertNode(30);
+		String str=cll2.toString();
+		System.out.println(str);
+	
+	}
+	
+}
