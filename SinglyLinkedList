@@ -1,0 +1,233 @@
+
+public class ListNode {
+	
+	private int data;
+	private ListNode next;
+	
+	ListNode(int data)
+	{
+		this.data=data;
+		next=null;
+		
+	}
+	ListNode()
+	{
+		data=-1;
+		next=null;
+	}
+	
+	public void setData(int data)
+	{
+		this.data=data;
+		
+	}
+	public int getData(){
+		return data;
+		
+	}
+	
+	public ListNode getNext()
+	{
+		return next;
+	}
+	 
+	public void setNext(ListNode next)
+	{
+		this.next=next;
+	}
+	public void getNextData ()
+	{
+		System.out.println(next.getData());
+	}
+	
+
+}
+
+
+public class SLinkedList {
+	
+	private ListNode head;
+	private int length;
+	
+	public ListNode getHead()
+	{
+		return head;
+	}
+	
+	public int getLength()
+	{
+		return length;
+	}
+	
+	//----Insert Operations------
+	
+	public void insertAtBegin(int data)
+	{
+	
+	ListNode newNode=new ListNode(data);
+	
+	newNode.setNext(head);
+	head=newNode;
+	
+	length++;
+		
+	}
+	
+	public void insertAtEnd(int data)
+	{	
+		ListNode newNode=new ListNode(data);
+		
+		if(head==null)
+		{
+			head=newNode;
+		}
+		else
+		{	
+			ListNode q, p;
+			for(p=head;(q=p.getNext())!=null;p=q);
+			p.setNext(newNode);
+			
+		}
+		length++;
+		
+	}
+	
+	public void insertAtPosition(int data, int position)
+	{
+		if(position <0) insertAtBegin(data);
+		else if(position>=length) insertAtEnd(data);
+		else
+		{ 	
+			ListNode p;
+			p=head;
+			for (int i=1;i<=position-2;i++)
+			{
+				p=p.getNext();
+			}
+			ListNode newNode=new ListNode(data);
+			newNode.setNext(p.getNext());
+			p.setNext(newNode);
+			
+			}
+		length+=1;
+		
+	}
+	
+	//---
+	
+	//--- Delete Operations
+	
+	public ListNode removeFromBegin()
+	{
+		ListNode temp=head;
+		if(temp!=null)
+		{
+			head=temp.getNext();
+		}
+		
+		temp.setNext(null);
+		length--;
+		return temp;
+		
+		
+	}
+	
+	public ListNode removeFromEnd()
+	{
+		ListNode q,p,next;
+		p=head;q=head;
+		while((next=p.getNext())!=null)
+		{	
+			q=p;
+			p=p.getNext();
+		}
+		
+		q.setNext(null);
+		length-=1;
+		return p;
+		
+		
+	}
+	
+	public ListNode removeFromPosition(int position)
+	{
+		if(position<=1)
+		{
+			return removeFromBegin();
+		}
+		else if(position>=length)
+		{
+			return removeFromEnd();
+		}
+		else
+		{
+			ListNode q;
+			ListNode p=head;
+			q=head;
+			
+			for(int i=1;i<position;i+=1)
+			{
+				q=p;
+				p=p.getNext();
+			}
+			
+			q.setNext((p.getNext()));
+			p.setNext(null);
+			length--;
+			return p;
+		}
+		
+		
+		
+	}
+	
+	public ListNode removeNodeoByData(int data)
+	{
+		int position=0;
+		ListNode temp=head;
+		while(temp.getData() != data)
+		{
+			position++;
+			temp=temp.getNext();
+		}
+		
+		return removeFromPosition(position);
+	}
+	//--Print the list	
+	public String toString(){
+		
+		String result="";
+		if(head==null) return result +"}";
+		else{
+			ListNode p=head;
+			while(p!=null)
+			{
+				result=result +  p.getData()+ "-->";			
+				p=p.getNext();
+			}
+			return result+p;
+		}
+	} 
+	
+	//--clears the list	
+	void clearList()
+	{
+		head=null;
+		length=0;
+	}
+	
+	
+}
+public class SLLMain {
+	public static void main(String args[])
+	{
+		String llValues;
+		SLinkedList ll=new SLinkedList();
+		ListNode l3=new ListNode(3);
+		ListNode l2=new ListNode(2);
+		l2.setNext(l3);
+		
+		l2.getNextData();
+		
+	}
+}
