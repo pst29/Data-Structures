@@ -1,0 +1,187 @@
+public class Node {
+
+	private int key;
+	private int data;
+	private Node next;
+	
+	public Node()
+	{
+	  key=-1;
+	  data=-1;
+	  next=null;
+	}
+	
+	public Node( int key, int data)
+	{
+		this.key=key;
+		this.data=data;
+		next=null;
+	}
+	public void setKey(int key)
+	{
+		this.key=key;
+	}
+	
+	public void setData(int data)
+	{
+		this.data=data;
+	}
+	
+	public int getData()
+	{
+		return data;
+	}
+	
+	public int getKey()
+	{
+		return key;
+	}
+	public void setNext(Node next)
+	{
+		this.next=next;
+	}
+	
+	public Node getNext()
+	{
+		return next;
+	}
+}
+public class TableNode {
+	private int blockCount;
+	private Node startNode;
+	
+	public TableNode()
+	{
+		blockCount=0;
+		startNode=null;
+	}
+	
+	public int getBlockCount()
+	{
+		return blockCount;
+	}
+	public void setBlockCount(int blockCount)
+	{
+		this.blockCount=blockCount;
+	}
+	
+	public Node getStartNode()
+	{
+		return startNode;
+	}
+	
+	public void setStartNode(Node startNode)
+	{
+		this.startNode=startNode;
+		
+	}
+}
+
+public class HashTable {
+
+	private TableNode [] table;
+	private int iSize;
+	private int count;
+	
+	public HashTable(int iSize)
+	{
+		this.iSize=iSize;
+		table=new TableNode[iSize];
+		count=0;
+		
+		for(int i=0;i<iSize;i++)
+		{
+			
+			table[i]= new TableNode();
+			table[i].setStartNode(null);
+			table[i].setBlockCount(1);
+		}
+	}
+	
+	public int getSize()
+	{
+		return iSize;
+	}
+	
+	public int HashFunction(int key)
+	{
+			return key%iSize;
+	}
+	
+	public int insertValue(int data,int key)
+	{
+		Node newNode= new Node(key,data);
+		
+		int index=HashFunction(key);
+				
+		if(newNode==null)
+		{
+			return -1;
+		};
+		
+		if(table[index].getStartNode()==null)
+		{
+				table[index].setStartNode(newNode);
+				
+		}
+		else
+		{
+			newNode.setNext(table[index].getStartNode().getNext());
+			table[index].getStartNode().setNext(newNode);
+				
+		}
+		
+		count=count++;
+		table[index].setBlockCount(table[index].getBlockCount()+1);
+		
+		
+		return 1;
+		
+	}
+	public void deleteValu(int key, int data)
+	{
+		int index=HashFunction(key);
+		
+		if(table[index].getStartNode().getData()==data){
+			table[index].setStartNode(table[index].getStartNode().getNext());
+		}
+	}
+	public void displayTable()
+	{
+		for ( int i=0;i<iSize;i++)
+		{
+			System.out.print(i + " | "+table[i].getStartNode().getData() + "|");
+			
+			
+			for(Node temp=table[i].getStartNode().getNext();temp!=null;temp=temp.getNext())
+			{
+				System.out.print("-->"+temp.getData());
+				
+			}
+			System.out.println();
+			
+		}
+	}
+	
+	public TableNode[] getTable()
+	{
+		return table;
+	}
+}
+
+public class HashTableMain {
+
+	public static void main(String arga[])
+	{
+		HashTable table=new HashTable(10);
+
+
+		for(int i=0;i<35;i++)
+		{
+			table.insertValue(i, i);
+		}
+		table.deleteValu(1, 1);
+		table.displayTable();
+	}
+}
+
