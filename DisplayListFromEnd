@@ -1,0 +1,33 @@
+
+import java.util.Stack;
+
+public class DisplayListFromEnd {
+	
+	public static void recursiveReverseDisplay(ListNode head)
+	{
+		if(head==null)return;
+		recursiveReverseDisplay(head.getNext());
+		System.out.print(head.getData());
+	}
+	
+	public static void iterativeReverseDisplay(SLinkedList s)
+	{
+		//check how to implement collections in java
+		//then create stack in java add the node and pop from end
+	}
+	
+	
+	public static void main(String args[])
+	{
+		SLinkedList sll=new SLinkedList();
+		for(int i=1;i<=5;i++)
+		{
+			sll.insertAtEnd(i);
+		}
+		
+		recursiveReverseDisplay(sll.getHead());
+		System.out.println(sll.toString());
+	
+	}
+
+}
