@@ -6,11 +6,7 @@ public class StringSpaceReplace {
 	{
 		String s="P a la";
 		char [] s_array= s.toCharArray();
-		int length=s_array.length;
-		
-		
-		//System.out.println("sdfasf"+s_array.length);
-		
+		int length=s_array.length;	
 		int spaceCount=0;
 		for(int i=0;i<length;i++)
 		{
